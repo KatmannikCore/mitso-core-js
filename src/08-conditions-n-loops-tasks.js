@@ -228,7 +228,7 @@ function reverseString(str) {
  *   87354 => 45378
  *   34143 => 34143
  */
- function reverseInteger(num) {
+function reverseInteger(num) {
   return parseInt(num.toString().split('').reverse().join(''), 10);
 }
 
@@ -252,8 +252,13 @@ function reverseString(str) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  let arr = ccn.toString().split('').reverse();
+  arr = arr.map((x, i) => {
+    if (i % 2 !== 0) return (2 * x > 9) ? 2 * x - 9 : 2 * x;
+    return x;
+  });
+  return arr.reduce((a, b) => Number(a) + Number(b)) % 10 === 0;
 }
 
 /**
