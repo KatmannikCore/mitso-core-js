@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /**
  * You will complete the PaginationHelper class,
  * which is a utility class helpful for querying paging information related to an array.
@@ -24,34 +25,46 @@
 class PaginationHelper {
   // The constructor takes in an array of items and a integer indicating how many
   // items fit within a single page
-  constructor(/* collection, itemsPerPage */) {
-    throw new Error('Not implemented');
+  // Prodam garaj etaj + pogreb, ili ne prodam
+  constructor(collection, itemsPerPage) {
+    this.collection = collection;
+    this.itemsPerPage = itemsPerPage;
   }
 
   // returns the number of items within the entire collection
   itemCount() {
-    console.log(this);
-    throw new Error('Not implemented');
+    return this.collection.length;
   }
 
   // returns the number of pages
   pageCount() {
-    console.log(this);
-    throw new Error('Not implemented');
+    return Math.ceil(this.collection.length / this.itemsPerPage);
   }
 
   // returns the number of items on the current page. page_index is zero based.
   // this method should return -1 for pageIndex values that are out of range
-  pageItemCount() {
-    console.log(this);
-    throw new Error('Not implemented');
+  pageItemCount(pageIndex) {
+    if (pageIndex < 0 || pageIndex > (this.pageCount() - 1)) { return -1; }
+    const pageArr = [];
+    const n = this.pageCount();
+    let colLen = this.itemCount();
+    const { itemsPerPage } = this;
+    for (let i = 0; i < n; i += 1) {
+      pageArr.push((colLen > itemsPerPage) ? itemsPerPage : colLen);
+      colLen -= itemsPerPage;
+    }
+    return pageArr[pageIndex];
   }
 
   // determines what page an item is on. Zero based indexes
   // this method should return -1 for itemIndex values that are out of range
-  pageIndex() {
-    console.log(this);
-    throw new Error('Not implemented');
+  pageIndex(itemIndex) {
+    if (itemIndex < 0 || itemIndex > (this.itemCount())) { return -1; }
+    const n = this.pageCount();
+    const colLen = this.itemCount();
+    if (colLen === 0) { return -1; }
+    const { itemsPerPage } = this;
+    return itemIndex === 0 ? 0 : Math.floor(itemIndex / itemsPerPage);
   }
 }
 
