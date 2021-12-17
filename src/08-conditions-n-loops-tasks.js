@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable no-param-reassign */
 /* eslint-disable max-len */
 /* eslint-disable no-mixed-operators */
@@ -346,8 +347,15 @@ function toNaryString(num, n) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  let common = '';
+  for (let i = 0; i < pathes[0].length; i++) {
+    for (let j = 1; j < pathes.length; j++) {
+      if (pathes[0].charAt(i) !== pathes[j].charAt(i)) { return common.substring(0, common.lastIndexOf('/') + 1); }
+    }
+    common += pathes[0].charAt(i);
+  }
+  return common.substring(0, common.lastIndexOf('/') + 1);
 }
 
 /**
