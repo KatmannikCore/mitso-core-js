@@ -274,8 +274,25 @@ function isString(value) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const symbolsMap = {
+    A: 0,
+    J: 10,
+    Q: 11,
+    K: 12,
+    '♣': 0,
+    '♦': 13,
+    '♥': 26,
+    '♠': 39,
+  };
+  const lSymbol = symbolsMap[value.slice(-1)];
+  let fSymbol;
+  if (value.length > 2) {
+    fSymbol = 9;
+  } else if (Number(value[0]) > 1) {
+    fSymbol = Number(value[0]) - 1;
+  } else fSymbol = symbolsMap[value[0]];
+  return fSymbol + lSymbol;
 }
 
 module.exports = {
