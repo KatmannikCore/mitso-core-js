@@ -283,8 +283,12 @@ function propagateItemsByPositionIndex(arr) {
  *   [ 1,2,3,4,5,6,7,8,9,10 ] => [ 10, 9, 8 ]
  *   [ 10, 10, 10, 10 ] => [ 10, 10, 10 ]
  */
-function get3TopItems(/* arr */) {
-  throw new Error('Not implemented');
+function get3TopItems(arr) {
+  const rez = [];
+  if (arr.length !== 0) { rez.push(arr.splice(arr.indexOf(Math.max.apply(null, arr)), 1)[0]); }
+  if (arr.length !== 0) { rez.push(arr.splice(arr.indexOf(Math.max.apply(null, arr)), 1)[0]); }
+  if (arr.length !== 0) { rez.push(arr.splice(arr.indexOf(Math.max.apply(null, arr)), 1)[0]); }
+  return rez;
 }
 
 /**
