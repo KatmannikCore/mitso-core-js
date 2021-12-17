@@ -198,7 +198,7 @@ function extractEmails(str) {
  *             '└──────────┘\n'
  *
  */
- function getRectangleString(width, height) {
+function getRectangleString(width, height) {
   const whitespaceLength = '\\n'.length;
   const realWidth = width - whitespaceLength;
   const realHeight = height - whitespaceLength;
@@ -224,8 +224,13 @@ function extractEmails(str) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  return str.split('').map((currentValue, i) => {
+    const charI = str.charCodeAt(i);
+    // eslint-disable-next-line max-len
+    const temp = charI % 32 <= 13 ? String.fromCharCode(charI + 13) : String.fromCharCode(charI - 13);
+    return charI <= 64 || charI >= 123 ? currentValue : temp;
+  }).join('');
 }
 
 /**
