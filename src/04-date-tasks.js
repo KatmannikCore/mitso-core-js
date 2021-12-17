@@ -1,3 +1,7 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-use-before-define */
+/* eslint-disable camelcase */
 /* *******************************************************************************************
  *                                                                                           *
  * Please read the following tutorial before implementing tasks:                              *
@@ -120,8 +124,32 @@ function angleBetweenClockHands(date) {
  *    getDay(365, false) => "December, 31"
  *    getDay(366, true) => "December, 31"
  */
-function getDay(/* day, isLeap */) {
-  throw new Error('Not implemented');
+// passed
+function getDay(day, isLeap) {
+  // console.log(day,isLeap);
+  const days_of_year = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+  const temp = [31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365];
+  if (isLeap) {
+    days_of_year[1] = 29;
+    const temp2 = [31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366];
+    const result = monthDay(day, temp2, days_of_year);
+    return result;
+  }
+  const result = monthDay(day, temp, days_of_year);
+  return result;
+}
+// eslint-disable-next-line consistent-return
+function monthDay(day, arr, days_of_year) {
+  const info = {
+    1: 'January', 2: 'February', 3: 'March', 4: 'April', 5: 'May', 6: 'June', 7: 'July', 8: 'August', 9: 'September', 10: 'October', 11: 'November', 12: 'December',
+  };
+  for (let i = 0; i < 12; i++) {
+    if (day <= arr[i]) {
+      const month = i + 1;
+      date = days_of_year[i] - (arr[i] - day);
+      return `${info[month]}, ${date}`;
+    }
+  }
 }
 
 module.exports = {
