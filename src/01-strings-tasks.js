@@ -32,7 +32,7 @@ function concatenateStrings(value1, value2) {
  *   'b'     => 1
  *   ''      => 0
  */
- function getStringLength(value) {
+function getStringLength(value) {
   return value.length;
 }
 
