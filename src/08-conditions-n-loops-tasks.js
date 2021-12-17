@@ -302,10 +302,14 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  if (str.length === 0) return true;
+  const ind = Math.max(str.lastIndexOf('['), str.lastIndexOf('{'), str.lastIndexOf('('), str.lastIndexOf('<'));
+  const nextChar = (str.charAt(ind) === '(') ? ')' : String.fromCharCode(str.charCodeAt(ind) + 2);
+  if (str.charAt(ind + 1) !== nextChar) return false;
+  str = str.substring(0, ind) + str.substring(ind + 2);
+  return isBracketsBalanced(str);
 }
-
 /**
  * Returns the string with n-ary (binary, ternary, etc, where n <= 10)
  * representation of specified number.
