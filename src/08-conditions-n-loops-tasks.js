@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* *************************************************************************************************
  *                                                                                                *
  * Please read the following tutorial before implementing tasks:                                   *
@@ -26,8 +27,8 @@
  *  21 => 'Fizz'
  *
  */
-function getFizzBuzz(/* num */) {
-  throw new Error('Not implemented');
+function getFizzBuzz(num) {
+  return (num % 15 === 0) ? 'FizzBuzz' : (num % 5 === 0) ? 'Buzz' : (num % 3 === 0) ? 'Fizz' : num;
 }
 
 /**
