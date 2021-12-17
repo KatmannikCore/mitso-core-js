@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-mixed-operators */
 /* eslint-disable no-nested-ternary */
 /* *************************************************************************************************
@@ -114,8 +115,17 @@ function isTriangle(a, b, c) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+function doRectanglesOverlap(a, b) {
+  function isInsideRectangleA(x, y) {
+    return (x >= a.left && x <= a.left + a.width && y >= a.top && y <= a.top + a.height);
+  }
+  function isInsideRectangleB(x, y) {
+    return (x >= b.left && x <= b.left + b.width && y >= b.top && y <= b.top + b.height);
+  }
+  return isInsideRectangleB(a.left, a.top) || isInsideRectangleB(a.left + a.width, a.top)
+  || isInsideRectangleB(a.left, a.top + a.height) || isInsideRectangleB(a.left + a.width, a.top + a.height)
+  || isInsideRectangleA(b.left, b.top) || isInsideRectangleA(b.left + b.width, b.top)
+  || isInsideRectangleA(b.left, b.top + b.height) || isInsideRectangleA(b.left + b.width, b.top + b.height);
 }
 
 /**
