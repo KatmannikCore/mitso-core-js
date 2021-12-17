@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-param-reassign */
 /* eslint-disable max-len */
@@ -421,8 +422,25 @@ function getMatrixProduct(m1, m2) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  let win;
+  let check = position.some((a, i, arr) => {
+    win = arr[i][0];
+    return (arr[i][0] === arr[i][1] && arr[i][1] === arr[i][2] && arr[i][0] !== undefined);
+  });
+
+  if (check) return win;
+
+  check = position.some((a, i, arr) => {
+    win = arr[0][i];
+    return (arr[0][i] === arr[1][i] && arr[1][i] === arr[2][i] && arr[0][i] !== undefined);
+  });
+
+  if (check) return win;
+  if (position[0][0] === position[1][1] && position[1][1] === position[2][2] && position[2][2] !== undefined) return position[0][0];
+  if (position[0][2] === position[1][1] && position[1][1] === position[2][0] && position[2][2] !== undefined) return position[1][1];
+
+  return undefined;
 }
 
 module.exports = {
